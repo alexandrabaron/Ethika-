@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethika - Pilotez votre impact RSE en toute simplicité</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2E7D32;
+            --secondary: #4CAF50;
+            --accent: #81C784;
+            --light: #E8F5E9;
+            --dark: #1B5E20;
+            --text: #333;
+            --bg: #FFFFFF;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 90px; /* Ajustez selon la taille de votre logo */
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .nav-links a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:not(.btn):hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.25);
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15);
+        }
+        
+        section {
+            padding: 6rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3 {
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light) 0%, rgba(232, 245, 233, 0.7) 100%);
+            padding: 10rem 1rem 8rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(129, 199, 132, 0.15);
+            z-index: 0;
+        }
+        
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(129, 199, 132, 0.1);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: #444;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .hero-image {
+            margin-top: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            max-width: 200px; /* Réduit de la taille originale */
+            width: 100%; /* S'assure que l'image est responsive */
+            height: auto; /* Maintient les proportions */
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features {
+            background-color: white;
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+        
+        .features-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--light) 0%, rgba(232, 245, 233, 0.7) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(46, 125, 50, 0.1);
+        }
+        
+        .feature-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--primary);
+        }
+        
+        .mission {
+            background: linear-gradient(135deg, var(--light) 0%, rgba(232, 245, 233, 0.7) 100%);
+            border-radius: 20px;
+            padding: 6rem 2rem;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission:before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(129, 199, 132, 0.15);
+            z-index: 0;
+        }
+        
+        .mission-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .team {
+            margin-top: 6rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .team-member {
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-member img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid white;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .team-member:hover img {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member p {
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .contact {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            text-align: center;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #164a1b 100%);
+            color: white;
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            width: 46px;
+            height: 46px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        
+        .social-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+        }
+        
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover svg {
+            fill: var(--dark);
+        }
+        
+        .footer-logo {
+            height: 50px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1); /* Rend le logo blanc */
+        }
+        
+        .pricing {
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+        
+        .pricing-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .pricing-header {
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        
+        .pricing-header h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .amount {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .period {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .annual-price {
+            color: #666;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-features {
+            margin-bottom: 2rem;
+            width: 100%;
+            flex-grow: 1;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .pricing-features li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.4rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: var(--light);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232E7D32'%3E%3Cpath d='M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z'/%3E%3C/svg%3E");
+            background-size: 0.8rem;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .pricing-card .btn {
+            margin-top: auto;
+        }
+            
+           
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 2rem auto 0;
+            }
+            
+            section {
+                padding: 4rem 1rem;
+            }
+            
+            .hero-image {
+                max-width: 90%; /* Réduit davantage sur mobile */
+            }
+            
+            .logo img {
+                height: 45px; /* Légèrement plus petit sur mobile */
+            }
+            
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+             
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <img src="logo-ethika.png" alt="Logo Ethika">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#mission">Notre Mission</a></li>
+                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                <li><a href="#prix">Nos offres</a></li>
+                <li><a href="demo-form.html" class="btn">Demander une démo</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Pilotez votre impact RSE en toute simplicité</h1>
+            <p>Transformez vos objectifs RSE en résultats concrets avec notre plateforme intuitive, conçue pour les entreprises engagées d'aujourd'hui et de demain.</p>
+            <div class="hero-buttons">
+                <a href="demo-form.html" class="btn">Demander une démo</a>
+                <a href="#fonctionnalites" class="btn btn-secondary">Découvrir</a>
+            </div>
+        </div>
+        <img src="ethika.png" alt="Illustration d'impact RSE" class="hero-image">
+    </section>
+    
+    <section id="mission" class="mission">
+        <h2>Notre Mission</h2>
+        <div class="mission-content">
+            <p>Ethika est née d'une conviction simple : une démarche RSE bien pilotée peut transformer positivement une entreprise tout en contribuant à un monde meilleur. Notre plateforme permet aux entreprises de toutes tailles de mesurer, analyser et améliorer leur impact environnemental et social en quelques clics.</p>
+            <p>Face à des exigences réglementaires croissantes et des consommateurs de plus en plus engagés, nous vous offrons une solution clé en main pour faire de votre responsabilité sociétale un véritable levier de performance et de différenciation.</p>
+            
+            <div class="team">
+                <h3>L'équipe derrière Ethika</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="alex.jpg" alt="Photo de Marie">
+                        <h3>Alexandra Baron</h3>
+                        <p>Co-fondatrice & CEO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="ness.jpg" alt="Photo de Thomas">
+                        <h3>Ness Tchenio</h3>
+                        <p>Co-fondatrice & COO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="rose.jpg" alt="Photo de Sophie">
+                        <h3>Rose Cymbler</h3>
+                        <p>Co-fondatrice & CTO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="yann.jpg" alt="Photo de Sophie">
+                        <h3>Yann Briere</h3>
+                        <p>Co-fondateur & Data Scientist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="fonctionnalites" class="features">
+        <div class="features-intro">
+            <h2>Nos Fonctionnalités</h2>
+            <p>Des outils puissants et intuitifs pour piloter efficacement votre démarche RSE et générer un impact positif mesurable.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3,13H15.25L13,9L15,7.25L21.75,14L15,20.75L13,19L15.25,15H3V13Z"/>
+                    </svg>
+                </div>
+                <h3>Suivi des KPI RSE</h3>
+                <p>Visualisez et analysez vos indicateurs clés de performance RSE sur un tableau de bord intuitif et personnalisable.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14,10H2V12H14V10M14,6H2V8H14V6M2,16H10V14H2V16M21.5,11.5L23,13L16,20L11.5,15.5L13,14L16,17L21.5,11.5Z"/>
+                    </svg>
+                </div>
+                <h3>Rapports automatisés</h3>
+                <p>Générez des bilans clairs et actionnables pour communiquer sur vos progrès RSE en interne comme en externe.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,3.25C12,3.25 6,10 6,14C6,17.32 8.69,20 12,20A6,6 0 0,0 18,14C18,10 12,3.25 12,3.25M14.47,9.97L15.53,11.03L9.53,17.03L8.47,15.97M9.75,10A1.25,1.25 0 0,1 11,11.25A1.25,1.25 0 0,1 9.75,12.5A1.25,1.25 0 0,1 8.5,11.25A1.25,1.25 0 0,1 9.75,10M14.25,14.5A1.25,1.25 0 0,1 15.5,15.75A1.25,1.25 0 0,1 14.25,17A1.25,1.25 0 0,1 13,15.75A1.25,1.25 0 0,1 14.25,14.5Z"/>
+                    </svg>
+                </div>
+                <h3>Solutions adaptées</h3>
+                <p>Recevez des suggestions personnalisées basées sur vos données pour améliorer concrètement votre impact environnemental et social.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17,17H15V13H17M13,17H11V7H13M9,17H7V10H9M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/>
+                    </svg>
+                </div>
+                <h3>UX intuitive</h3>
+                <p>Profitez d'une interface simple et accessible, avec des intégrations possibles à vos outils existants pour une expérience fluide.</p>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section id="prix" class="pricing">
+        <div class="pricing-intro">
+            <h2>Nos Offres</h2>
+            <p>Des solutions adaptées à vos besoins pour vous accompagner dans votre démarche RSE</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Abonnement Classic</h3>
+                    <div class="price">
+                        <span class="amount">250 €</span>
+                        <span class="period">/ mois</span>
+                    </div>
+                    <p class="annual-price">soit 3000 € par an</p>
+                    <p class="annual-price">ou</p>
+                    <p class="annual-price">300€ par mois sans engagement</p>
+                </div>
+                <div class="pricing-features">
+                    <ul>
+                        <li>Diagnostic initial personnalisé</li>
+                        <li>Partage de votre fiche d'évaluation au sein de votre entreprise et du réseau Ethika</li>
+                        <li>Suivi des KPI RSE (tableau de bord interactif)</li>
+                        <li>Accès à un catalogue d'actions RSE standardisées</li>
+                        <li>Rapports périodiques (mensuels/trimestriels)</li>
+                    </ul>
+                </div>
+                <a href="demo-form.html" class="btn">Demander une démo</a>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="popular-tag">Recommandé</div>
+                <div class="pricing-header">
+                    <h3>Abonnement Premium</h3>
+                    <div class="price">
+                        <span class="amount">350 €</span>
+                        <span class="period">/ mois</span>
+                    </div>
+                    <p class="annual-price">soit 4200 € par an</p>
+                </div>
+                <div class="pricing-features">
+                    <ul>
+                        <li>Toutes les fonctionnalités de l'abonnement Classic</li>
+                        <li>Partage de votre fiche d'évaluation de manière illimité</li>
+                        <li>Accès à des recommandations personnalisées (basées sur l'IA)</li>
+                        <li>Suivi personnalisé par un conseiller RSE</li>
+                        <li>Accès à des webinaires et formations RSE</li>
+                        <li>Assistance pour l'obtention d'aides publiques et la participation à des concours</li>
+                    </ul>
+                </div>
+                <a href="demo-form.html" class="btn">Demander une démo</a>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Label RSE</h3>
+                    <div class="price">
+                        <span class="amount">500 €</span>
+                    </div>
+                    <p class="annual-price">service ponctuel</p>
+                </div>
+                <div class="pricing-features">
+                    <ul>
+                        <li>Évaluation des pratiques RSE</li>
+                        <li>Délivrance d'un label RSE si les critères sont remplis</li>
+                        <li>Prix en fonction de la taille de l'entreprise et de la complexité de l'évaluation</li>
+                    </ul>
+                </div>
+                <a href="demo-form.html" class="btn">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    
+    <section id="contact" class="contact">
+        <h2>Prêt à transformer votre démarche RSE ?</h2>
+        <p>Rejoignez les entreprises qui font la différence avec Ethika</p>
+        <div class="contact-buttons">
+            <a href="demo-form.html" class="btn">Demander une démo</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+           <a href="ethika-site.html" class="logo" style="color: white;">Ethi<span style="color: var(--accent);">ka</span></a>
+            <div class="social-links">
+                <a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
+                    </svg>
+                </a>
+            </div>
+            <p>&copy; 2025 Ethika. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>
