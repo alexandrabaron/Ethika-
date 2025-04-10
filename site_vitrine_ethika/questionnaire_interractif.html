@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethika - Questionnaire RSE</title>
+    <style>
+        /* Styles from your existing code */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2E7D32;
+            --secondary: #4CAF50;
+            --accent: #81C784;
+            --light: #E8F5E9;
+            --dark: #1B5E20;
+            --text: #333;
+            --bg: #FFFFFF;
+            --error: #f44336;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .nav-links a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:not(.btn):hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.25);
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15);
+        }
+        
+        section {
+            padding: 6rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3 {
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .form-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            padding: 3.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container:before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(129, 199, 132, 0.1);
+            z-index: 0;
+        }
+        
+        .form-container:after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(129, 199, 132, 0.05);
+            z-index: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #444;
+            font-size: 0.95rem;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #fafafa;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+            background-color: white;
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            display: none;
+            font-weight: 500;
+        }
+        
+        input.error, select.error, textarea.error {
+            border-color: var(--error);
+            background-color: rgba(244, 67, 54, 0.03);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 0.7rem;
+            margin-top: 0.3rem;
+            transform: scale(1.2);
+        }
+        
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, var(--light) 0%, rgba(232, 245, 233, 0.7) 100%);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .success-message h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .success-message a:not(.btn) {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid var(--primary);
+            transition: var(--transition);
+        }
+        
+        .success-message a:not(.btn):hover {
+            color: var(--dark);
+            border-color: var(--dark);
+        }
+        
+        .success-message .btn {
+            margin-top: 1.5rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #164a1b 100%);
+            color: white;
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            width: 46px;
+            height: 46px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        
+        .social-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+        }
+        
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover svg {
+            fill: var(--dark);
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 4rem 1rem;
+            }
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-container, .success-message {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="ethika-site.html" class="logo">Ethi<span>ka</span></a>
+            <ul class="nav-links">
+                <li><a href="ethika-site.html#accueil">Accueil</a></li>
+                <li><a href="ethika-site.html#mission">Notre Mission</a></li>
+                <li><a href="ethika-site.html#fonctionnalites">Fonctionnalités</a></li>
+                <li><a href="#" class="btn">Demander une démo</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section>
+        <h1>Questionnaire RSE</h1>
+        <p>Évaluez les pratiques RSE de votre entreprise avec notre questionnaire interactif. Répondez aux questions ci-dessous pour obtenir un diagnostic personnalisé.</p>
+        
+        <div class="form-container">
+            <form id="rse-form">
+                <!-- Section 1: Informations générales -->
+                <h2>Informations générales</h2>
+                <div class="form-group">
+                    <label for="company-name">Nom de l'entreprise *</label>
+                    <input type="text" id="company-name" name="company-name" required placeholder="Nom de votre entreprise">
+                    <div class="error-message">Veuillez entrer le nom de votre entreprise</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sector">Secteur d'activité *</label>
+                    <select id="sector" name="sector" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="tech">Technologie</option>
+                        <option value="manufacturing">Manufacture</option>
+                        <option value="services">Services</option>
+                        <option value="retail">Commerce de détail</option>
+                        <option value="other">Autre</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner un secteur d'activité</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employees">Nombre d'employés *</label>
+                    <select id="employees" name="employees" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="1-10">1-10 employés</option>
+                        <option value="11-50">11-50 employés</option>
+                        <option value="51-200">51-200 employés</option>
+                        <option value="201-500">201-500 employés</option>
+                        <option value="501-1000">501-1000 employés</option>
+                        <option value="1000+">Plus de 1000 employés</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner le nombre d'employés</div>
+                </div>
+                
+                <!-- Section 2: Connaissance et engagement RSE -->
+                <h2>Connaissance et engagement RSE</h2>
+                <div class="form-group">
+                    <label for="rse-knowledge">À quel point êtes-vous familier avec les pratiques RSE ? *</label>
+                    <select id="rse-knowledge" name="rse-knowledge" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="beginner">Débutant</option>
+                        <option value="intermediate">Intermédiaire</option>
+                        <option value="advanced">Avancé</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner votre niveau de connaissance</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rse-actions">Quelles actions RSE avez-vous déjà mises en place ? (Plusieurs réponses possibles)</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rse-action1" name="rse-actions" value="recycling">
+                        <label for="rse-action1">Recyclage des déchets</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rse-action2" name="rse-actions" value="energy">
+                        <label for="rse-action2">Réduction de la consommation d'énergie</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rse-action3" name="rse-actions" value="diversity">
+                        <label for="rse-action3">Promotion de la diversité et de l'inclusion</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rse-action4" name="rse-actions" value="training">
+                        <label for="rse-action4">Formation des employés sur les enjeux RSE</label>
+                    </div>
+                </div>
+                
+                <!-- Section 3: Environnement -->
+                <h2>Environnement</h2>
+                <div class="form-group">
+                    <label for="carbon-footprint">Avez-vous mesuré votre empreinte carbone ? *</label>
+                    <select id="carbon-footprint" name="carbon-footprint" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                        <option value="planned">Prévu dans les 12 prochains mois</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner une option</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="waste-management">Avez-vous mis en place un système de gestion des déchets ? *</label>
+                    <select id="waste-management" name="waste-management" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                        <option value="planned">Prévu dans les 12 prochains mois</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner une option</div>
+                </div>
+                
+                <!-- Section 4: Social -->
+                <h2>Social</h2>
+                <div class="form-group">
+                    <label for="diversity-policy">Avez-vous une politique de diversité et d'inclusion ? *</label>
+                    <select id="diversity-policy" name="diversity-policy" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                        <option value="planned">Prévu dans les 12 prochains mois</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner une option</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employee-training">Proposez-vous des formations sur les enjeux RSE à vos employés ? *</label>
+                    <select id="employee-training" name="employee-training" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                        <option value="planned">Prévu dans les 12 prochains mois</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner une option</div>
+                </div>
+                
+                <!-- Section 5: Gouvernance -->
+                <h2>Gouvernance</h2>
+                <div class="form-group">
+                    <label for="ethics-policy">Avez-vous une politique d'éthique et de conformité ? *</label>
+                    <select id="ethics-policy" name="ethics-policy" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                        <option value="planned">Prévu dans les 12 prochains mois</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner une option</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stakeholder-engagement">Impliquez-vous vos parties prenantes dans vos décisions RSE ? *</label>
+                    <select id="stakeholder-engagement" name="stakeholder-engagement" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="yes">Oui</option>
+                        <option value="no">Non</option>
+                        <option value="planned">Prévu dans les 12 prochains mois</option>
+                    </select>
+                    <div class="error-message">Veuillez sélectionner une option</div>
+                </div>
+                
+                <!-- Section 6: Objectifs RSE -->
+                <h2>Objectifs RSE</h2>
+                <div class="form-group">
+                    <label for="rse-goals">Quels sont vos principaux objectifs RSE pour les 12 prochains mois ? *</label>
+                    <textarea id="rse-goals" name="rse-goals" rows="4" required placeholder="Décrivez vos objectifs RSE..."></textarea>
+                    <div class="error-message">Veuillez décrire vos objectifs RSE</div>
+                </div>
+                
+                <button type="submit" class="btn btn-submit">Soumettre le questionnaire</button>
+            </form>
+            
+            <div class="success-message" id="success-message">
+                <h2>Merci pour votre participation !</h2>
+                <p>Nous avons bien reçu vos réponses. Notre équipe vous contactera bientôt pour vous fournir un diagnostic personnalisé.</p>
+                <p>En attendant, n'hésitez pas à consulter notre <a href="#">centre de ressources</a> pour en savoir plus sur l'impact RSE.</p>
+                <br>
+                <a href="ethika-site.html" class="btn">Retour à l'accueil</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <a href="ethika-site.html" class="logo" style="color: white;">Ethi<span style="color: var(--accent);">ka</span></a>
+            <div class="social-links">
+                <a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44,21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
+                    </svg>
+                </a>
+            </div>
+            <p>&copy; 2025 Ethika. Tous droits réservés.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Form validation
+        const form = document.getElementById('rse-form');
+        const successMessage = document.getElementById('success-message');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Check required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error');
+                    const errorMessage = field.parentElement.querySelector('.error-message');
+                    if (errorMessage) {
+                        errorMessage.style.display = 'block';
+                    }
+                } else {
+                    field.classList.remove('error');
+                    const errorMessage = field.parentElement.querySelector('.error-message');
+                    if (errorMessage) {
+                        errorMessage.style.display = 'none';
+                    }
+                }
+            });
+            
+            if (isValid) {
+                // Hide form and show success message
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // In a real implementation, you would send the form data to your server here
+                console.log('Form submitted successfully');
+            }
+        });
+        
+        // Clear error on input
+        const formInputs = form.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorMessage = this.parentElement.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
